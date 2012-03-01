@@ -2,14 +2,29 @@
 <html>
 <head>
 <title>Hello CN</title>
-<script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js">
-</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="jquery.mobile-1.1.0-rc.1.min.css" />
+<script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
+<script type="text/javascript" charset="utf-8" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="jquery.mobile-1.1.0-rc.1.min.js"></script>
 </head>
 <body>
-<h1>Hello CN</h1>
-<p>
-	Log in, and this app will show you all the products that you've 
-	bookmarked on Consumer Notebook.
-</p>
+<div data-role="page">
+	<div data-role="header">
+		<h1>Hello CN</h1>
+	</div><!-- /header -->
+	<div data-role="content">
+		<p>
+			Sign in, and this app will show you all the products that you've 
+			bookmarked on Consumer Notebook.
+		</p>
+		<input id="email">
+		<input id="password">
+		<button id="signin">Show me my products!</button>
+	</div><!-- /content -->
+</div><!-- /page -->
+
+<script type="text/javascript">
+</script>
 </body>
 </html>
