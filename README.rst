@@ -16,6 +16,8 @@ We developed this sample app with PhoneGap_, an HTML5 app platform that lets you
 Instructions
 ------------
 
+WARNING: THIS IS STILL IN DEVELOPMENT. It doesn't actually work yet, so please don't try it yet.
+
 1. Follow the `Phonegap installation instructions`_ and install Eclipse Classic, the Android SDK/ADT plugin, and PhoneGap. Go through the tutorial once to learn how to use PhoneGap. 
 
 .. _`Phonegap installation instructions`: http://phonegap.com/start#android
