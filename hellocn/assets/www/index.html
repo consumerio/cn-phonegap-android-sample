@@ -9,7 +9,9 @@
 <script type="text/javascript" charset="utf-8" src="jquery.mobile-1.1.0-rc.1.min.js"></script>
 </head>
 <body>
-<div data-role="page">
+
+<!-- Start of first page -->
+<div data-role="page" id="signinpage">
 	<div data-role="header">
 		<h1>Hello CN</h1>
 	</div><!-- /header -->
@@ -24,7 +26,70 @@
 	</div><!-- /content -->
 </div><!-- /page -->
 
+<!-- Start of second page -->
+<div data-role="page" id="productlist">
+
+	<div data-role="header">
+		<h1>Your Products</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<p>Here are all the products that you've bookmarked on Consumer Notebook.</p>
+		<ul data-role="listview" data-theme="g">
+			<li><a href="#productdetail">Acura</a></li>
+			<li><a href="#productdetail">Audi</a></li>
+			<li><a href="#productdetail">BMW</a></li>
+		</ul>		
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<a href="#signinpage" data-role="button">Back to the sign-in page</a>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<!-- Start of third page -->
+<div data-role="page" id="productdetail">
+
+	<div data-role="header">
+		<h1>Product Name</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<p>Details about Product Name:</p>
+		<div data-role="collapsible">
+			<h3>Lists containing it</h3>
+			<ul>
+				<li>Some List</li>
+				<li>Some other list</li>
+			</ul>
+		</div>
+		<div data-role="collapsible">
+			<h3>Grids containing it</h3>
+			<ul>
+				<li>Some Grid</li>
+				<li>Some other grid</li>
+			</ul>
+		</div>		
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<a href="#signinpage" data-role="button">Back to the sign-in page</a>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
 <script type="text/javascript">
+var API_KEY = "20f9cbd78686f52083c171b0fb306bde";
+$("#signin").bind("click", function(event, ui){
+	$.mobile.changePage("#productlist");
+//	$.ajax({
+//		url: "https://consumernotebook.com/api/v1/products.json?api_key=" + API_KEY,
+//		username: "audreyr",
+//		password: "this-is-not-really-my-password",
+//		success: function(){
+//			$(this).addClass("done");
+//		}
+//	});
+});
 </script>
 </body>
 </html>
