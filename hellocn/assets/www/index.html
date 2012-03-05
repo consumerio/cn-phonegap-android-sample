@@ -34,11 +34,11 @@
 <div data-role="page" id="productlist">
 
 	<div data-role="header">
-		<h1><span id="title-username"></span> Products</h1>
+		<h1 style="white-space:normal;"><span id="title-username"></span>'s products</h1>
 	</div><!-- /header -->
 
 	<div data-role="content">
-		<ul data-role="listview" data-theme="g" id="products">
+		<ul data-role="listview" id="products">
 		</ul>		
 	</div><!-- /content -->
 
@@ -51,24 +51,19 @@
 <div data-role="page" id="productdetail">
 
 	<div data-role="header">
-		<h1>Product Name</h1>
+		<h1>Details</h1>
 	</div><!-- /header -->
 
-	<div data-role="content">	
-		<p>Details about Product Name:</p>
-		<div data-role="collapsible">
-			<h3>Lists containing it</h3>
-			<ul>
-				<li>Some List</li>
-				<li>Some other list</li>
-			</ul>
-		</div>
-		<div data-role="collapsible">
-			<h3>Grids containing it</h3>
-			<ul>
-				<li>Some Grid</li>
-				<li>Some other grid</li>
-			</ul>
+	<div data-role="content">
+		<h2 id="cn-product-detail-title"></h2>
+		<ul data-role="listview">
+			<li data-role="list-divider">Lists containing it</li>
+			<li>Some List</li>
+			<li>Some other list</li>
+			<li data-role="list-divider">Grids containing it</li>
+			<li>Some Grid</li>
+			<li>Some other grid</li>
+		</ul>
 		</div>		
 	</div><!-- /content -->
 
@@ -88,11 +83,16 @@ $("#go").bind("click", function(event, ui){
     	dataType: "jsonp",
     	success: function(data){
     		$.each(data.objects, function(i, val){
-    			$('#products').append('<li><a href="#productdetail">' + val.title + '</a></li>');
+    			$('#products').append('<li><a style="white-space:normal;" class="cn-product-title">' + val.title + '</a></li>');
             });
          	$.mobile.changePage("#productlist");
 		}
     });
+});
+
+$(document).on('click', '.cn-product-title', function(event){
+	$('#cn-product-detail-title').text($(this).text());
+	$.mobile.changePage('#productdetail');
 });
 </script>
 </body>
