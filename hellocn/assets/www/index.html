@@ -17,12 +17,16 @@
 	</div><!-- /header -->
 	<div data-role="content">
 		<p>
-			Sign in, and this app will show you all the products that you've 
+			This app shows you all the products that someone has 
 			bookmarked on Consumer Notebook.
 		</p>
-		<input id="email">
-		<input id="password">
-		<button id="signin">Show me my products!</button>
+		<p>
+		  <label for="username">Username</label>&nbsp;
+		  <input id="username" name="username" type="text" value="">
+		</p>
+		<p>
+			<button id="go">Go</button>
+		</p>
 	</div><!-- /content -->
 </div><!-- /page -->
 
@@ -30,15 +34,11 @@
 <div data-role="page" id="productlist">
 
 	<div data-role="header">
-		<h1>Your Products</h1>
+		<h1><span id="title-username"></span> Products</h1>
 	</div><!-- /header -->
 
-	<div data-role="content">	
-		<p>Here are all the products that you've bookmarked on Consumer Notebook.</p>
-		<ul data-role="listview" data-theme="g">
-			<li><a href="#productdetail">Acura</a></li>
-			<li><a href="#productdetail">Audi</a></li>
-			<li><a href="#productdetail">BMW</a></li>
+	<div data-role="content">
+		<ul data-role="listview" data-theme="g" id="products">
 		</ul>		
 	</div><!-- /content -->
 
@@ -78,17 +78,21 @@
 </div><!-- /page -->
 
 <script type="text/javascript">
-var API_KEY = "20f9cbd78686f52083c171b0fb306bde";
-$("#signin").bind("click", function(event, ui){
-	$.mobile.changePage("#productlist");
-//	$.ajax({
-//		url: "https://consumernotebook.com/api/v1/products.json?api_key=" + API_KEY,
-//		username: "audreyr",
-//		password: "this-is-not-really-my-password",
-//		success: function(){
-//			$(this).addClass("done");
-//		}
-//	});
+var API_KEY = "your-api-key-here";
+$("#go").bind("click", function(event, ui){
+//	$.support.cors = true;
+    var username = $('#username').val();
+    $('#title-username').text(username);
+    $.ajax({
+    	url: "https://consumernotebook.com/api/v1/products/?username=" + username + "&apikey=" + API_KEY,
+    	dataType: "jsonp",
+    	success: function(data){
+    		$.each(data.objects, function(i, val){
+    			$('#products').append('<li><a href="#productdetail">' + val.title + '</a></li>');
+            });
+         	$.mobile.changePage("#productlist");
+		}
+    });
 });
 </script>
 </body>
