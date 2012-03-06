@@ -59,13 +59,9 @@
 		<h2 id="cn-product-detail-title"></h2>
 		<ul data-role="listview" id="lists-containing-it">
 			<li data-role="list-divider">Lists containing it</li>
-			<li>Some List</li>
-			<li>Some other list</li>
 		</ul>
 		<ul data-role="listview" id="grids-containing-it">
 			<li data-role="list-divider">Grids containing it</li>
-			<li>Some Grid</li>
-			<li>Some other grid</li>
 		</ul>
 		</div>		
 	</div><!-- /content -->
@@ -86,8 +82,8 @@ $("#go").bind("click", function(event, ui){
     	dataType: "jsonp",
     	success: function(data){
     		$.each(data.objects, function(i, val){
-    			$('#products').append('<li><a style="white-space:normal;" class="cn-product-title" data-product-pk="' 
-    				+ val.pk + '">' + val.title + '</a></li>');
+    			$('#products').append('<li><a style="white-space:normal;" class="cn-product-title" data-product-id="' 
+    				+ val.id + '">' + val.title + '</a></li>');
             });
          	$.mobile.changePage("#productlist");
 		}
@@ -96,12 +92,20 @@ $("#go").bind("click", function(event, ui){
 
 $(document).on('click', '.cn-product-title', function(event){
 	$('#cn-product-detail-title').text($(this).text());
-	var pk = $(this).attr('data-product-pk');
+	var id = $(this).attr('data-product-id');
 	$.ajax({
-		url: "https://consumernotebook.com/api/v1/products/" + pk + "/?apikey=" + API_KEY,
+		url: "https://consumernotebook.com/api/v1/products/" + id + "/?apikey=" + API_KEY,
 		dataType: "jsonp",
 		success: function(data){
-			$.mobile.changePage('#productdetail');
+    		$.each(data.lists, function(i, val){
+    			$('#lists-containing-it').append('<li><a style="white-space:normal;" class="cn-product-title" data-product-id="' 
+    				+ val.id + '">' + val.title + '</a></li>');
+            });
+    		$.each(data.grids, function(i, val){
+    			$('#grids-containing-it').append('<li><a style="white-space:normal;" class="cn-product-title" data-product-id="' 
+    				+ val.id + '">' + val.title + '</a></li>');
+            });
+   			$.mobile.changePage('#productdetail');
 		}
 	});
 });
