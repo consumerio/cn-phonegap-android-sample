@@ -3,11 +3,11 @@
 <head>
 <title>Hello CN</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="jquery.mobile-1.1.0-rc.1.min.css" />
+<link rel="stylesheet" href="jquery.mobile-1.0.1.min.css" />
 <link rel="stylesheet" href="custom.css" />
 <script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
 <script type="text/javascript" charset="utf-8" src="jquery-1.7.1.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="jquery.mobile-1.1.0-rc.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="jquery.mobile-1.0.1.min.js"></script>
 </head>
 <body>
 
@@ -39,7 +39,7 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-		<ul data-role="listview" id="products">
+		<ul data-role="listview" id="products" data-theme="g">
 		</ul>		
 	</div><!-- /content -->
 
@@ -58,16 +58,16 @@
 	<div data-role="content">
 		<h2 id="cn-product-detail-title"></h2>
 		
-		<ul data-role="listview" id="lists-containing-it-header">
+		<ul data-role="listview" id="lists-containing-it-header" data-theme="g">
 			<li data-role="list-divider">Lists containing it</li>
 		</ul>
-		<ul data-role="listview" id="lists-containing-it">
+		<ul data-role="listview" id="lists-containing-it" data-theme="g">
 		</ul>
 		
-		<ul data-role="listview" id="grids-containing-it-header">
+		<ul data-role="listview" id="grids-containing-it-header" data-theme="g">
 			<li data-role="list-divider">Grids containing it</li>
 		</ul>
-		<ul data-role="listview" id="grids-containing-it">
+		<ul data-role="listview" id="grids-containing-it" data-theme="g">
 		</ul>
 	</div><!-- /content -->
 
@@ -91,7 +91,10 @@ $("#go").bind("click", function(event, ui){
     				+ val.id + '">' + val.title + '</a></li>');
             });
          	$.mobile.changePage("#productlist");
-		}
+		},
+		complete: function(){
+            $('#products').listview('refresh');
+		}	
     });
 });
 
@@ -106,14 +109,18 @@ $(document).on('click', '.cn-product-title', function(event){
 		success: function(data){
     		$.each(data.lists, function(i, val){
     			$('#lists-containing-it').append('<li><h3 style="white-space:normal;" data-list-id="' 
-    				+ val.id + '">' + val.title + '</h3><p>' + val.description + '</p></li>');
+    				+ val.id + '">' + val.title + '</h3><p style="white-space:normal;">' + val.description + '</p></li>');
             });
     		$.each(data.grids, function(i, val){
     			$('#grids-containing-it').append('<li><h3 style="white-space:normal;" data-grid-id="' 
-    				+ val.id + '">' + val.title + '</h3><p>' + val.description + '</p></li>');
+    				+ val.id + '">' + val.title + '</h3><p style="white-space:normal;">' + val.description + '</p></li>');
             });
    			$.mobile.changePage('#productdetail');
-		}
+		},
+		complete: function(){
+            $('#lists-containing-it').listview('refresh');
+            $('#grids-containing-it').listview('refresh');
+		}	
 	});
 });
 </script>
